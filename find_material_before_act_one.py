@@ -30,24 +30,24 @@ with codecs.open("martin_list.txt","r","utf-8") as f:
 	martin_list = f.read().replace("\r","").split("\n")
 
 	#let's uncomment the following line and print martin's list so we can see what's in there
-	#print martin_list
+	print martin_list
 	
 	#now let's open each of the xml files in the subdirectories below the present directory if those files are in Martin's list
-	for i in glob.glob("*//*.xml"):
+	for i in glob.glob("*/*.xml"):
 		#now if we print i, we see that each i contains the full path to the file (e.g. A00456\\A00456.xml). First let's take only what follows the "\\" character. (NB: On Macs, you'll have to replace "\" with "/".) Then, since martin's list only lists the filename without extension (e.g. A00456 rather than A00456.xml), we'll take a slice of the filenames and ignore the last four characters (the ".xml" characters of the filename) 
 
-		file_name = i.split("\\")[-1][:-4]
+		file_name = i.split("/")[-1][:-4]
 		
 		if file_name in martin_list:
 			
 			#now let's uncomment the line below and print all of the paths to the files that are in martin_list
-			#print i
+			print i
 			
 			#now open the current i
 			with codecs.open(i,"r","utf-8") as play:
 				play = play.read()
 				
-				#now we want to check to see if this play has an act one marker. If it does, we're going to grab all content before that market and save it to a new file
+				#now we want to check to see if this play has an act one marker. If it does, we're going to grab all content before that marker and save it to a new file
 				if '<div n="1" type="act">' in play:
 				
 					#wrap the next few lines of code in a try/except wrapper, which basically means: Try to do these things, but if something goes wrong, just print an error to the console, rather than halting
@@ -63,7 +63,7 @@ with codecs.open("martin_list.txt","r","utf-8") as f:
 						#if the play *does* have an act one marker, then let's grab everything before the <div n="1" type="act"> tag and write that little chunk to disk
 					
 						#then let's write all of the content leading up to act one to disk	
-						with codecs.open("_material_before_act_one\\" + file_name + "_before_act_one.xml","w","utf-8") as out:
+						with codecs.open("_material_before_act_one/" + file_name + "_before_act_one.xml","w","utf-8") as out:
 							out.write(unicode(soup).split('<div n="1" type="act">')[0])
 
 					#if something goes wrong, print the error and the name of the file that caused the error

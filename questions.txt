@@ -1,0 +1,3 @@
+Is import os different than import os.path?
+what does .split do? Literally spawn a new file?
+what does glob do? 

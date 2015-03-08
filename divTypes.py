@@ -7,11 +7,13 @@ for i in glob.glob("_material_before_act_one/*_before_act_one.xml"):
 	print(f.readline())
 	f.close()
 	'''
-import codecs, re, glob
+import codecs, re, glob, csv
 
 count = 0
 
 divTypes = []
+csvFile = csv.writer(open("playID_opening.csv", "w"))
+csvFile.writerow(["file_name", "opening"])
 
 for i in glob.glob('_material_before_act_one/*_before_act_one.xml'):
 	file_name = i.split("/")[-1][:-19]
@@ -33,8 +35,10 @@ print count
 			if divType not in divTypes:
 				divTypes.append(divType)
 				count = count + 1
+			csvFile.writerow([file_name, divType])
 
-	
+
+
 		except:
 			continue
 print divTypes		

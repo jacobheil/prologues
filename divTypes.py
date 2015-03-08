@@ -7,9 +7,9 @@ for i in glob.glob("_material_before_act_one/*_before_act_one.xml"):
 	print(f.readline())
 	f.close()
 	'''
-import codecs, re, glob, csv
+import codecs, re, glob
 
-
+count = 0
 
 for i in glob.glob('_material_before_act_one/*_before_act_one.xml'):
 	file_name = i.split("/")[-1][:-19]
@@ -21,12 +21,18 @@ for i in glob.glob('_material_before_act_one/*_before_act_one.xml'):
 print count
 
 	'''
-	with codecs.open(i, "r", "utf-8") as opening:
-		count = 0
-		for line in opening:
-			count =  count + 1
-	test = [file_name, count]
-	print(test)
+	opening = open(i, "r")
+
+	for line in opening:
+		s = re.match(r'^(<div\stype=")(.*)(">)$', line)
+
+		try:
+			print s.group(2)
+	
+		except:
+			continue
+		
+			
 	
 
 '''

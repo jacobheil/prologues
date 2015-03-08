@@ -11,16 +11,7 @@ for i in glob.glob('_material_before_act_one/*_before_act_one.xml'):
 	file_name = i.split("/")[-1][:-19]
 	
 	opening = open(i, "r")
-	soup = BeautifulSoup(opening)
-	
-	try:
-		title = soup.head
-		print file_name, title
 
-	except Exception as exc:
-		print exc, i
-
-'''
 	for line in opening:
 		s = re.match(r'^(<div\stype=")(.*)(">)$', line)
 
@@ -34,14 +25,9 @@ for i in glob.glob('_material_before_act_one/*_before_act_one.xml'):
 		except:
 			continue
 
-		try:
-			title = soup.body.head
-			print title
+print count
 
-		except:
-			continue
-
-'''	
+	
 
 '''
 with codecs.open('_material_before_act_one/A00725_before_act_one.xml',"r","utf-8") as play:

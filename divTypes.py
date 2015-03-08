@@ -11,6 +11,8 @@ import codecs, re, glob
 
 count = 0
 
+divTypes = []
+
 for i in glob.glob('_material_before_act_one/*_before_act_one.xml'):
 	file_name = i.split("/")[-1][:-19]
 	'''
@@ -27,12 +29,16 @@ print count
 		s = re.match(r'^(<div\stype=")(.*)(">)$', line)
 
 		try:
-			print s.group(2)
+			divType = s.group(2)
+			if divType not in divTypes:
+				divTypes.append(divType)
+				count = count + 1
+
 	
 		except:
 			continue
-		
-			
+print divTypes		
+print count
 	
 
 '''

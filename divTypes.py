@@ -7,6 +7,6 @@ for i in glob.glob("_material_before_act_one/*_before_act_one.xml"):
 	print(f.readline())
 	f.close()
 	'''
-f = open('A00960_before_act_one.xml')
-print(f.readline(*))
-f.close()
+f = open('_material_before_act_one/A00960_before_act_one.xml')
+for line in f:
+	print line

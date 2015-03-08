@@ -1,13 +1,5 @@
-'''
-import glob
-
-for i in glob.glob("_material_before_act_one/*_before_act_one.xml"):
-	f = open(i)
-
-	print(f.readline())
-	f.close()
-	'''
 import codecs, re, glob, csv
+from bs4 import BeautifulSoup
 
 count = 0
 
@@ -17,16 +9,18 @@ csvFile.writerow(["file_name", "opening"])
 
 for i in glob.glob('_material_before_act_one/*_before_act_one.xml'):
 	file_name = i.split("/")[-1][:-19]
-	'''
-	I use this part to test my script to make sure I was grapping the filenames and to see how many there were. I leave it commented in here just because. you need 'count = 0' somewhere too.
 	
-	print file_name	
-	count = count + 1
-print count
-
-	'''
 	opening = open(i, "r")
+	soup = BeautifulSoup(opening)
+	
+	try:
+		title = soup.head
+		print file_name, title
 
+	except Exception as exc:
+		print exc, i
+
+'''
 	for line in opening:
 		s = re.match(r'^(<div\stype=")(.*)(">)$', line)
 
@@ -35,15 +29,19 @@ print count
 			if divType not in divTypes:
 				divTypes.append(divType)
 				count = count + 1
-			csvFile.writerow([file_name, divType])
-
-
+			csvFile.writerow([file_name, divType])    
 
 		except:
 			continue
-print divTypes		
-print count
-	
+
+		try:
+			title = soup.body.head
+			print title
+
+		except:
+			continue
+
+'''	
 
 '''
 with codecs.open('_material_before_act_one/A00725_before_act_one.xml',"r","utf-8") as play:

@@ -7,12 +7,29 @@ for i in glob.glob("_material_before_act_one/*_before_act_one.xml"):
 	print(f.readline())
 	f.close()
 	'''
-import codecs
+import codecs, re, glob
 
-with codecs.open('_material_before_act_one/A00725_before_act_one.xml',"r","utf-8") as play:
-	play = play.read()
-	if '<div type="to_the_reader">' in play:
-		print "hooray"
+count = 0
+
+for i in glob.glob('_material_before_act_one/*_before_act_one.xml'):
+	file_name = i.split("/")[-1][:-19]
+	print file_name
+	count = count + 1
+print count
+
+'''with codecs.open('_material_before_act_one/A00725_before_act_one.xml',"r","utf-8") as play:
+	for line in play:
+		print line
+
+	play = play.readline()
+	print play
+for hit in play:
+		if 'xmlns' in hit:
+			print "hooray"
+			count = count + 1
+			print count
+'''
+	
 
 
 '''

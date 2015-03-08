@@ -1,12 +1,14 @@
 import codecs, re, glob, csv
 from bs4 import BeautifulSoup
 
-count = 0
 
+divCounts = {}
+
+'''
 divTypes = []
 csvFile = csv.writer(open("playID_opening.csv", "w"))
 csvFile.writerow(["file_name", "opening"])
-
+'''
 for i in glob.glob('_material_before_act_one/*_before_act_one.xml'):
 	file_name = i.split("/")[-1][:-19]
 	
@@ -17,15 +19,20 @@ for i in glob.glob('_material_before_act_one/*_before_act_one.xml'):
 
 		try:
 			divType = s.group(2)
-			if divType not in divTypes:
-				divTypes.append(divType)
-				count = count + 1
-			csvFile.writerow([file_name, divType])    
+			if divType not in divCounts:
+				
+				divCounts[divType] = [0]
+			
+			divCounts[divType][0] += 1
 
+			'''
+			count = count + 1
+			csvFile.writerow([file_name, divType])    
+			'''
 		except:
 			continue
 
-print count
+print divCounts
 
 	
 

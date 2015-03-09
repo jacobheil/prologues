@@ -9,6 +9,9 @@ divTypes = []
 csvFile = csv.writer(open("playID_opening.csv", "w"))
 csvFile.writerow(["file_name", "opening"])
 '''
+csvOpenings = csv.writer(open("Opening_count.csv", "w"))
+csvOpenings.writerow(["opening_divType", "count"])
+
 for i in glob.glob('_material_before_act_one/*_before_act_one.xml'):
 	file_name = i.split("/")[-1][:-19]
 	
@@ -31,6 +34,10 @@ for i in glob.glob('_material_before_act_one/*_before_act_one.xml'):
 			'''
 		except:
 			continue
+
+writer = csv.writer(open("Opening_count.csv", "w"))
+for key, value in divCounts.items():
+   csvOpenings.writerow([key, value])
 
 print divCounts
 
